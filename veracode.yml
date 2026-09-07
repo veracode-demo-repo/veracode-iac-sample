@@ -1,0 +1,24 @@
+debug: true
+
+veracode_iac_secrets_scan:
+  push:
+    trigger: true
+    branches_to_run:
+      - "*"
+    branches_to_exclude:
+  pull_request:
+    trigger: true
+    action:
+      - opened
+      - synchronize
+    target_branch:
+      - default_branch
+  # Required to push results to the Veracode Platform - was missing before
+  analysis_on_platform: true
+  break_build_policy_findings: true
+  break_build_on_error: true
+  error_message: "Veracode IAC secrets scan faced a problem. Please contact your Veracode administrator for more information."
+  issues:
+    trigger: false
+    commands:
+      - "Veracode IAC Scan"
